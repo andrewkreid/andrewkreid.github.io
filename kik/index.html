@@ -13,6 +13,7 @@
 					} else {
 						resText = user.fullName;
 						document.getElementById("res-thumb-url").innerHTML = user.thumbnail;
+						document.getElementById("res-thumb-img").src = user.thumbnail;
 					}
 				})
 			}
@@ -34,7 +35,7 @@
 			<p id="res-text">.....</p>
 			<p id="res-thumb-url">&nbsp;</p>
 			<p>
-				<img height="64" width="64" src="image/icon.png"/>
+				<img id="res-thumb-img" height="64" width="64" src="image/icon.png"/>
 			</p>
 		</div>
 
