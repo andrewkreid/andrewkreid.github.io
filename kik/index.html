@@ -4,6 +4,10 @@
 		<title>Kik Map Sample</title>
 
 		<script>
+
+		var centerLat = -33.831422;
+		var centerLng = 151.114569;
+
 		function getUserDetails() {
 			if (kik.enabled) {
 				kik.getUser(function (user) {					
@@ -11,7 +15,6 @@
 						document.getElementById("res-text").innerHTML = "Didn't get User";
 					} else {
 						document.getElementById("res-text").innerHTML = user.fullName;
-						document.getElementById("res-thumb-url").innerHTML = user.thumbnail;
 						document.getElementById("res-thumb-img").src = user.thumbnail;
 					}
 				})
@@ -21,8 +24,7 @@
 		}
 
 		function resetUserDetails() {
-			document.getElementById("res-text").innerHTML = "....";
-			document.getElementById("res-thumb-url").innerHTML = "....";
+			document.getElementById("res-text").innerHTML = "&nbsp;";
 			document.getElementById("res-thumb-img").src = "image/icon.png";
 		}
 
@@ -32,20 +34,29 @@
 			var bottomRightLat = -33.882805;
 			var bottomRightLng = 151.224546;
 
-			var centerLat = topLeftLat + Math.random() * (topLeftLat - bottomRightLat);
-			var centerLng = topLeftLng + Math.random() * (topLeftLng - bottomRightLng);
+			centerLat = topLeftLat + Math.random() * (topLeftLat - bottomRightLat);
+			centerLng = topLeftLng + Math.random() * (topLeftLng - bottomRightLng);
 
 			document.getElementById("static-map-img").src =
 			    "http://maps.googleapis.com/maps/api/staticmap?center=" +
 			    centerLat + "," + centerLng +
-			    "&zoom=15&scale=1&size=128x128&maptype=roadmap&format=png&visual_refresh=true";
+			    "&zoom=15&scale=1&size=256x256&maptype=roadmap&format=png&visual_refresh=true";
 		}
+
+		kik.ready(function () {
+			if (kik.message) {
+				centerLat = kik.message.lat;
+				centerLng = kik.message.lng;
+				newStaticMap();
+			}
+		});
 
 		function sendMapMessage() {
 			kik.send( {
 				title : "Static Map",
 				text  : "Here's a Map",
-				pic   : document.getElementById("static-map-img").src
+				pic   : document.getElementById("static-map-img").src,
+				data  : { lat : centerLat, lng : centerLng }
 			});
 		}
 
@@ -62,13 +73,12 @@
 
 		<h4>Kik Web-page with Static Map</h4>
 		<div>
-			<p id="res-text">.....</p>
-			<p id="res-thumb-url">&nbsp;</p>
+			<p id="res-text">&nbsp;</p>
 			<p>
 				<img id="res-thumb-img" height="64" width="64" src="image/icon.png"/>
 			</p>
 			<p>
-				<img id="static-map-img" width="128" src="http://maps.googleapis.com/maps/api/staticmap?center=-33.831422,151.114&zoom=15&scale=1&size=128x128&maptype=roadmap&format=png&visual_refresh=true">
+				<img id="static-map-img" width="256" src="http://maps.googleapis.com/maps/api/staticmap?center=-33.882805,151&zoom=15&scale=1&size=256x256&maptype=roadmap&format=png&visual_refresh=true">
 			</p>
 		</div>
 
