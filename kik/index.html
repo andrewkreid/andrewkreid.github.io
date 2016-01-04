@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kik Map Sample</title>
+
+		<script>
+		function getUserDetails() {
+			if (kik.enabled) {
+				kik.getUser(function (user) {
+					var resText = "Didn't get User";
+					if (!user) {
+						// user denied access
+					} else {
+						resText = 
+						document.getElementById("res-text").innerHTML = user.fullName;
+					}
+				})
+			}
+		}
+		</script>
+        <meta charset="utf-8">
+        <meta name="description" content="My amazing app!">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="kik-transparent-statusbar" content="black">
+        <meta name="kik-hide-form-helpers" content="true">
+        <link rel="kik-icon" href="/image/icon.png">
+	</head>
+
+	<body>
+
+		<div>
+			<p>Results here</p>
+			<p id="res-text">.....</p>
+		</div>
+
+		<div>
+			<button onclick="getUserDetails()" type="button">Get User Details</button>
+		</div>
+
+		<script src="http://cdn.kik.com/kik/2.0.5/kik.js"></script>
+	</body>
+</html>
