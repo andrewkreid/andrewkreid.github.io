@@ -99,11 +99,12 @@
 
 	<script>
 		// self executing function here
-		(function() {
+		(function(kik) {
    			// your page initialization code here
    			// the DOM will be available here
    			kik.on('message', updateCenterFromMessage);
-		})();
+   			updateCenterFromMessage();
+		})(kik);
 </script>
 	</body>
 </html>
