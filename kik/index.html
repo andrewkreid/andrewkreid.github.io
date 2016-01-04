@@ -12,10 +12,11 @@
 						resText = "Didn't get User";
 					} else {
 						resText = user.fullName;
+						document.getElementById("res-thumb-url").innerHTML = user.thumbnail;
 					}
 				})
 			}
-			document.getElementById("res-text").innerHTML;
+			document.getElementById("res-text").innerHTML = resText;
 		}
 		</script>
         <meta charset="utf-8">
@@ -31,6 +32,7 @@
 		<div>
 			<p>Results here</p>
 			<p id="res-text">.....</p>
+			<p id="res-thumb-url">&nbsp;</p>
 		</div>
 
 		<div>
