@@ -14,12 +14,18 @@
 						resText = user.fullName;
 						document.getElementById("res-thumb-url").innerHTML = user.thumbnail;
 						document.getElementById("res-thumb-img").src = user.thumbnail;
-						document.getElementById("res-thumb-img").height = "128";
 					}
 				})
 			}
 			document.getElementById("res-text").innerHTML = resText;
 		}
+
+		function resetUserDetails() {
+			document.getElementById("res-text").innerHTML = "....";
+			document.getElementById("res-thumb-url").innerHTML = "....";
+			document.getElementById("res-thumb-img").src = "image/icon.png";
+		}
+		
 		</script>
         <meta charset="utf-8">
         <meta name="description" content="My amazing app!">
@@ -42,6 +48,7 @@
 
 		<div>
 			<button onclick="getUserDetails()" type="button">Get User Details</button>
+			<button onclick="resetUserDetails()" type="button">Reset</button>
 		</div>
 
 		<script src="http://cdn.kik.com/kik/2.0.5/kik.js"></script>
