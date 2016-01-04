@@ -9,6 +9,7 @@
 		var centerLat = -33.831422;
 		var centerLng = 151.114569;
 
+		// Update the page with the User's full name and avatar icon, if available.
 		function getUserDetails() {
 			if (kik.enabled) {
 				kik.getUser(function (user) {					
@@ -29,6 +30,7 @@
 			document.getElementById("res-thumb-img").src = "image/icon.png";
 		}
 
+		// Randomly pick a LatLng in Sydney and update the image.
 		function newStaticMap() {
 			var topLeftLat = -33.831422;
 			var topLeftLng = 151.114569;
@@ -40,6 +42,7 @@
 			setMapImgURL();
 		}
 
+		// Build a static maps URL from the current center LatLng and update the IMG.
 		function setMapImgURL() {
 			document.getElementById("static-map-img").src =
 			    "http://maps.googleapis.com/maps/api/staticmap?center=" +
@@ -47,26 +50,27 @@
 			    "&zoom=15&scale=1&size=256x256&maptype=roadmap&format=png&visual_refresh=true";			
 		}
 
+		// Update the Map Center from the Kik message (if any). The LatLng was saved in the
+		// chat message data when the message was sent.
 		function updateCenterFromMessage() {
 			if (kik.message) {
 				centerLat = kik.message.lat;
 				centerLng = kik.message.lng;
-				setMapImgURL();
 			}			
+			setMapImgURL();
 		}
 
+		// Send the static map image URL as a Kik message
 		function sendMapMessage() {
 			kik.send( {
 				title : "Static Map",
-				text  : "Here's a Map",
+				text  : "Here's a Map for " + centerLat + ", " + centerLng,
 				pic   : document.getElementById("static-map-img").src,
 				data  : { lat : centerLat, lng : centerLng }
 			});
 		}
-
-
-
 		</script>
+
         <meta charset="utf-8">
         <meta name="description" content="My amazing app!">
         <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -100,14 +104,14 @@
 			</button>
 		</div>
 
-	<script>
-		// self executing function here
-		(function(kik) {
-   			// your page initialization code here
-   			// the DOM will be available here
-   			kik.on('message', updateCenterFromMessage);
-   			updateCenterFromMessage();
-		})(kik);
-</script>
+		<script>
+			// self executing function here
+			(function(kik) {
+	   			// your page initialization code here
+	   			// the DOM will be available here
+	   			kik.on('message', updateCenterFromMessage);
+	   			updateCenterFromMessage();
+			})(kik);
+		</script>
 	</body>
 </html>
