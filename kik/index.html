@@ -25,11 +25,6 @@
 			}
 		}
 
-		function resetUserDetails() {
-			document.getElementById("res-text").innerHTML = "&nbsp;";
-			document.getElementById("res-thumb-img").src = "image/icon.png";
-		}
-
 		// Randomly pick a LatLng in Sydney and update the image.
 		function newStaticMap() {
 			var topLeftLat = -33.831422;
@@ -82,19 +77,14 @@
 	<body>
 
 		<h4>Kik Web-page with Static Map</h4>
+		<p>
+			Tap on the map until you get a map you like, then tap Send Map to send it as
+			a Kik message.
+		</p>
 		<div>
-			<p id="res-text">&nbsp;</p>
-			<p>
-				<img id="res-thumb-img" height="64" width="64" src="image/icon.png"/>
-			</p>
-			<p>
-				<img id="static-map-img" width="256" src="http://maps.googleapis.com/maps/api/staticmap?center=-33.882805,151&zoom=15&scale=1&size=256x256&maptype=roadmap&format=png&visual_refresh=true">
-			</p>
+			<img onclick="newStaticMap()" id="static-map-img" width="256" src="http://maps.googleapis.com/maps/api/staticmap?center=-33.882805,151&zoom=15&scale=1&size=256x256&maptype=roadmap&format=png&visual_refresh=true">
 		</div>
-
 		<div>
-			<button onclick="getUserDetails()" type="button">Get User Details</button>
-			<button onclick="resetUserDetails()" type="button">Reset</button>
 			<button onclick="newStaticMap()" type="button">New Map</button>
 		</div>
 		<br>
@@ -104,6 +94,13 @@
 			</button>
 		</div>
 
+		<div>
+			<p id="res-text">&nbsp;</p>
+			<p>
+				<img id="res-thumb-img" height="64" width="64" src="image/icon.png"/>
+			</p>
+		</div>
+
 		<script>
 			// self executing function here
 			(function(kik) {
@@ -111,6 +108,7 @@
 	   			// the DOM will be available here
 	   			kik.on('message', updateCenterFromMessage);
 	   			updateCenterFromMessage();
+	   			getUserDetails();
 			})(kik);
 		</script>
 	</body>
