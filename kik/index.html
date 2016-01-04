@@ -5,17 +5,17 @@
 
 		<script>
 		function getUserDetails() {
+			var resText = "Kik not enabled";
 			if (kik.enabled) {
-				kik.getUser(function (user) {
-					var resText = "Didn't get User";
+				kik.getUser(function (user) {					
 					if (!user) {
-						// user denied access
+						resText = "Didn't get User";
 					} else {
-						resText = 
-						document.getElementById("res-text").innerHTML = user.fullName;
+						resText = user.fullName;
 					}
 				})
 			}
+			document.getElementById("res-text").innerHTML;
 		}
 		</script>
         <meta charset="utf-8">
@@ -23,7 +23,7 @@
         <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="kik-transparent-statusbar" content="black">
         <meta name="kik-hide-form-helpers" content="true">
-        <link rel="kik-icon" href="/image/icon.png">
+        <link rel="kik-icon" href="/kik/image/icon.png">
 	</head>
 
 	<body>
