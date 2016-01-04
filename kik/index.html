@@ -51,7 +51,7 @@
 			if (kik.message) {
 				centerLat = kik.message.lat;
 				centerLng = kik.message.lng;
-				newStaticMap();
+				setMapImgURL();
 			}			
 		}
 
@@ -105,8 +105,8 @@
 		(function(kik) {
    			// your page initialization code here
    			// the DOM will be available here
-   			kik.on('message', setMapImgURL);
-   			setMapImgURL();
+   			kik.on('message', updateCenterFromMessage);
+   			updateCenterFromMessage();
 		})(kik);
 </script>
 	</body>
